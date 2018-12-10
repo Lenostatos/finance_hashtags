@@ -11,9 +11,8 @@ Public Class access_database
 
     Public Sub New()
 
-        'first create a connection object
+        'first create a connection string
         Dim cnn_string As String
-        'the connection needs a connection string
         Dim cnn_string_builder As New OdbcConnectionStringBuilder()
 
         cnn_string_builder.Driver = "Microsoft Access Driver (*.mdb, *.accdb)"
@@ -24,6 +23,7 @@ Public Class access_database
 
         cnn_string = cnn_string_builder.ToString()
 
+        'then create a connection object from the connection string
         Dim db_connection As New OdbcConnection(cnn_string)
 
         'the connection has to be opened and closed manually!
@@ -34,19 +34,17 @@ Public Class access_database
         schema = db_connection.GetSchema("Tables") 'the "Tables" table contains metadata on the DB's tables, a.o. their names
 
         'we are interested in the two columns containing the table types and table names
-        Dim column_index_tbl_type As Integer
-        Dim column_index_tbl_name As Integer
+        Dim col_ind_tbl_type As Integer
+        Dim col_ind_tbl_name As Integer
 
-        column_index_tbl_type = schema.Columns.IndexOf("TABLE_TYPE") 'there are not only the "self made" tables but also system tables which are not relevant for the application
-        column_index_tbl_name = schema.Columns.IndexOf("TABLE_NAME")
+        col_ind_tbl_type = schema.Columns.IndexOf("TABLE_TYPE") 'there are not only the "self made" tables but also system tables which are not relevant for the application
+        col_ind_tbl_name = schema.Columns.IndexOf("TABLE_NAME")
 
         Dim table_names As New Collection
 
-        Dim row_index As Integer
-
-        For row_index = 0 To schema.Rows.Count - 1
-            If schema.Rows(row_index)(column_index_tbl_type) = "TABLE" Then '"self made" tables are of the type "TABLE"
-                table_names.Add(schema.Rows(row_index)(column_index_tbl_name))
+        For row_ind As Integer = 0 To schema.Rows.Count - 1
+            If schema.Rows(row_ind)(col_ind_tbl_type) = "TABLE" Then '"self made" tables are of the type "TABLE"
+                table_names.Add(schema.Rows(row_ind)(col_ind_tbl_name))
             End If
         Next
 

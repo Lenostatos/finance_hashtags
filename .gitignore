@@ -13,7 +13,7 @@
 # ignore all .txt files in the doc/ directory
 # doc/**/*.txt
 
-Exam_project/Exam_project/bin/
-Exam_project/Exam_project/obj/
+Exam_project/*/bin/
+Exam_project/*/obj/
 
 Exam_project/data/SQLite_resources/docs/

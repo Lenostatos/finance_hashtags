@@ -6,6 +6,9 @@
 
     Private Sub Main_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        DateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss"
+        DateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm:ss"
+
         data_binding = New BindingSource()
         data_binding.DataSource = data
 
@@ -42,5 +45,9 @@
             point_series.Points.DataBind(data_binding, "x_values", "y_values", "")
         Next
         'data_binding.ResetBindings(False) The ResetBindings method would usually be used
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Transaction_Adding_Form.Show()
     End Sub
 End Class

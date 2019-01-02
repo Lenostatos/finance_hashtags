@@ -1,0 +1,15 @@
+# Localisation
++ Text on GUI elements will be available in different languages.
++ These localized texts will be stored within a table in the database or maybe even an own database.
++ There will be one class/module that provides the texts for the GUI and has a property that allows the user to set the desired language.
++ Strings that are used within the code and don't need localization will be "hard coded" into modules.
+
+# Data Structure and Constraints
++ The user will be able to input multiple transactions with the same date and time because this is expected to be the best trade-off between user convenience and meaningful data input.
+
+# Multi-user feature
++ There won't be any for now.
++ In the future multi-user support might be realised by creating an own database for every user.
+	+ Allows to maintain the current database design.
+	+ Protects from data manipulation in between users.
+	+ Uses more disk space as opposed to storing all the data in one database.

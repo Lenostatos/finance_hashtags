@@ -7,115 +7,117 @@
 
 PRAGMA foreign_keys = ON;
 
-DROP TABLE IF EXISTS transaction_; -- TODO: find a command for dropping all the tables at once
-DROP TABLE IF EXISTS transaction_element;
-DROP TABLE IF EXISTS tag;
-DROP TABLE IF EXISTS transaction_tagging;
-DROP TABLE IF EXISTS tag_group;
-DROP TABLE IF EXISTS tag_grouping;
-DROP TABLE IF EXISTS partner;
-DROP TABLE IF EXISTS partner_group;
-DROP TABLE IF EXISTS partner_grouping;
-DROP TABLE IF EXISTS account;
-DROP TABLE IF EXISTS account_group;
-DROP TABLE IF EXISTS account_grouping;
-DROP TABLE IF EXISTS balance;
+-- In order to avoid conflicts with SQL keywords every user-defined table and column name will start with an underscore.
 
-CREATE TABLE transaction_( -- The underscore is needed because "transaction" is an SQL keyword.
-	id INTEGER PRIMARY KEY, -- AUTOINCREMENT should not be used if possible because it imposes a performance overhead and "the purpose of AUTOINCREMENT is to prevent the reuse of ROWIDs from previously deleted rows" [SQLite docs]. For further information see the documentation.
-	date REAL UNIQUE NOT NULL,
-	amount REAL NOT NULL,
-	description TEXT DEFAULT NULL,
-	id_account INTEGER NOT NULL REFERENCES account ON DELETE RESTRICT, -- the "REFERENCES <table-name>" is a shortcut for referencing the primay key of the table <table-name>.
-	id_partner INTEGER DEFAULT NULL REFERENCES partner ON DELETE RESTRICT
+DROP TABLE IF EXISTS _transaction; -- TODO: find a command for dropping all the tables at once
+DROP TABLE IF EXISTS _transaction_element;
+DROP TABLE IF EXISTS _tag;
+DROP TABLE IF EXISTS _transaction_tagging;
+DROP TABLE IF EXISTS _tag_group;
+DROP TABLE IF EXISTS _tag_grouping;
+DROP TABLE IF EXISTS _partner;
+DROP TABLE IF EXISTS _partner_group;
+DROP TABLE IF EXISTS _partner_grouping;
+DROP TABLE IF EXISTS _account;
+DROP TABLE IF EXISTS _account_group;
+DROP TABLE IF EXISTS _account_grouping;
+DROP TABLE IF EXISTS _balance;
+
+CREATE TABLE _transaction( -- The underscore is needed because "transaction" is an SQL keyword.
+	_id INTEGER PRIMARY KEY, -- AUTOINCREMENT should not be used if possible because it imposes a performance overhead and "the purpose of AUTOINCREMENT is to prevent the reuse of ROWIDs from previously deleted rows" [SQLite docs]. For further information see the documentation.
+	_date REAL NOT NULL,
+	_amount REAL NOT NULL,
+	_description TEXT DEFAULT NULL,
+	_id_account INTEGER NOT NULL REFERENCES _account ON DELETE RESTRICT, -- the "REFERENCES <table-name>" is a shortcut for referencing the primay key of the table <table-name>.
+	_id_partner INTEGER DEFAULT NULL REFERENCES _partner ON DELETE RESTRICT
 );
-CREATE INDEX transaction_account_index ON transaction_(id_account); -- In order to speed up the checks for foreign key violations the foreign key columns should be indexed according to the SQLite documentation.
-CREATE INDEX transaction_partner_index ON transaction_(id_partner);
+CREATE INDEX transaction_account_index ON _transaction(_id_account); -- In order to speed up the checks for foreign key violations the foreign key columns should be indexed (says the SQLite documentation).
+CREATE INDEX transaction_partner_index ON _transaction(_id_partner);
 
-CREATE TABLE transaction_element(
-	id INTEGER PRIMARY KEY,
-	amount REAL NOT NULL,
-	description TEXT DEFAULT NULL,
-	id_transaction_element INTEGER DEFAULT NULL REFERENCES transaction_element ON DELETE RESTRICT,
-	id_transaction INTEGER NOT NULL REFERENCES transaction_ ON DELETE RESTRICT
+CREATE TABLE _transaction_element(
+	_id INTEGER PRIMARY KEY,
+	_amount REAL NOT NULL,
+	_description TEXT DEFAULT NULL,
+	_id_transaction_element INTEGER DEFAULT NULL REFERENCES _transaction_element ON DELETE RESTRICT,
+	_id_transaction INTEGER NOT NULL REFERENCES _transaction ON DELETE RESTRICT
 );
-CREATE INDEX transaction_element_on_itself_index ON transaction_element(id_transaction_element);
-CREATE INDEX transaction_element_transaction_index ON transaction_element(id_transaction);
+CREATE INDEX transaction_element_on_itself_index ON _transaction_element(_id_transaction_element);
+CREATE INDEX transaction_element_transaction_index ON _transaction_element(_id_transaction);
 
-CREATE TABLE tag(
-	id INTEGER PRIMARY KEY,
-	name TEXT UNIQUE NOT NULL
-);
-
-CREATE TABLE transaction_tagging(
-	id INTEGER PRIMARY KEY,
-	id_tag INTEGER NOT NULL REFERENCES tag ON DELETE RESTRICT,
-	id_transaction INTEGER DEFAULT NULL REFERENCES transaction_ ON DELETE RESTRICT,
-	id_transaction_element INTEGER DEFAULT NULL REFERENCES transaction_element ON DELETE RESTRICT
-);
-CREATE INDEX transaction_tagging_tag_index ON transaction_tagging(id_tag);
-CREATE INDEX transaction_tagging_transaction_index ON transaction_tagging(id_transaction);
-CREATE INDEX transaction_tagging_transaction_element_index ON transaction_tagging(id_transaction_element);
-
-CREATE TABLE tag_group(
-	id INTEGER PRIMARY KEY,
-	name TEXT UNIQUE NOT NULL
+CREATE TABLE _tag(
+	_id INTEGER PRIMARY KEY,
+	_name TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE tag_grouping(
-	id INTEGER PRIMARY KEY,
-	id_tag INTEGER NOT NULL REFERENCES tag ON DELETE RESTRICT,
-	id_tag_group INTEGER DEFAULT NULL REFERENCES tag_group ON DELETE RESTRICT
+CREATE TABLE _transaction_tagging(
+	_id INTEGER PRIMARY KEY,
+	_id_tag INTEGER NOT NULL REFERENCES _tag ON DELETE RESTRICT,
+	_id_transaction INTEGER DEFAULT NULL REFERENCES _transaction ON DELETE RESTRICT,
+	_id_transaction_element INTEGER DEFAULT NULL REFERENCES _transaction_element ON DELETE RESTRICT
 );
-CREATE INDEX tag_grouping_tag_index ON tag_grouping(id_tag);
-CREATE INDEX tag_grouping_tag_group_index ON tag_grouping(id_tag_group);
+CREATE INDEX transaction_tagging_tag_index ON _transaction_tagging(_id_tag);
+CREATE INDEX transaction_tagging_transaction_index ON _transaction_tagging(_id_transaction);
+CREATE INDEX transaction_tagging_transaction_element_index ON _transaction_tagging(_id_transaction_element);
 
-CREATE TABLE partner(
-	id INTEGER PRIMARY KEY,
-	name TEXT UNIQUE NOT NULL,
-	details TEXT DEFAULT NULL
-);
-
-CREATE TABLE partner_group(
-	id INTEGER PRIMARY KEY,
-	name TEXT UNIQUE NOT NULL
+CREATE TABLE _tag_group(
+	_id INTEGER PRIMARY KEY,
+	_name TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE partner_grouping(
-	id INTEGER PRIMARY KEY,
-	id_partner INTEGER NOT NULL REFERENCES partner ON DELETE RESTRICT,
-	id_partner_group INTEGER DEFAULT NULL REFERENCES partner_group ON DELETE RESTRICT
+CREATE TABLE _tag_grouping(
+	_id INTEGER PRIMARY KEY,
+	_id_tag INTEGER NOT NULL REFERENCES _tag ON DELETE RESTRICT,
+	_id_tag_group INTEGER DEFAULT NULL REFERENCES _tag_group ON DELETE RESTRICT
 );
-CREATE INDEX partner_grouping_partner_index ON partner_grouping(id_partner);
-CREATE INDEX partner_grouping_partner_group_index ON partner_grouping(id_partner_group);
+CREATE INDEX tag_grouping_tag_index ON _tag_grouping(_id_tag);
+CREATE INDEX tag_grouping_tag_group_index ON _tag_grouping(_id_tag_group);
 
-CREATE TABLE account(
-	id INTEGER PRIMARY KEY,
-	name TEXT UNIQUE NOT NULL
-);
-
-CREATE TABLE account_group(
-	id INTEGER PRIMARY KEY,
-	name TEXT UNIQUE NOT NULL
+CREATE TABLE _partner(
+	_id INTEGER PRIMARY KEY,
+	_name TEXT UNIQUE NOT NULL,
+	_details TEXT DEFAULT NULL
 );
 
-CREATE TABLE account_grouping(
-	id INTEGER PRIMARY KEY,
-	id_account INTEGER NOT NULL REFERENCES account ON DELETE RESTRICT,
-	id_account_group INTEGER DEFAULT NULL REFERENCES account_group ON DELETE RESTRICT
+CREATE TABLE _partner_group(
+	_id INTEGER PRIMARY KEY,
+	_name TEXT UNIQUE NOT NULL
 );
-CREATE INDEX account_grouping_account_index ON account_grouping(id_account);
-CREATE INDEX account_grouping_account_group_index ON account_grouping(id_account_group);
 
-CREATE TABLE balance(
-	id INTEGER PRIMARY KEY,
-	date REAL NOT NULL,
-	amount REAL NOT NULL,
-	id_account INTEGER NOT NULL REFERENCES account ON DELETE RESTRICT
+CREATE TABLE _partner_grouping(
+	_id INTEGER PRIMARY KEY,
+	_id_partner INTEGER NOT NULL REFERENCES _partner ON DELETE RESTRICT,
+	_id_partner_group INTEGER DEFAULT NULL REFERENCES _partner_group ON DELETE RESTRICT
 );
-CREATE INDEX balance_account_index ON balance(id_account);
+CREATE INDEX partner_grouping_partner_index ON _partner_grouping(_id_partner);
+CREATE INDEX partner_grouping_partner_group_index ON _partner_grouping(_id_partner_group);
 
---.schema transaction_
---.schema transaction_element
---.schema tag
---.schema transaction_tagging
+CREATE TABLE _account(
+	_id INTEGER PRIMARY KEY,
+	_name TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE _account_group(
+	_id INTEGER PRIMARY KEY,
+	_name TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE _account_grouping(
+	_id INTEGER PRIMARY KEY,
+	_id_account INTEGER NOT NULL REFERENCES _account ON DELETE RESTRICT,
+	_id_account_group INTEGER DEFAULT NULL REFERENCES _account_group ON DELETE RESTRICT
+);
+CREATE INDEX account_grouping_account_index ON _account_grouping(_id_account);
+CREATE INDEX account_grouping_account_group_index ON _account_grouping(_id_account_group);
+
+CREATE TABLE _balance(
+	_id INTEGER PRIMARY KEY,
+	_date REAL NOT NULL,
+	_amount REAL NOT NULL,
+	_id_account INTEGER NOT NULL REFERENCES _account ON DELETE RESTRICT
+);
+CREATE INDEX balance_account_index ON _balance(_id_account);
+
+--.schema _transaction
+--.schema _transaction_element
+--.schema _tag
+--.schema _transaction_tagging

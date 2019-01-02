@@ -14,11 +14,9 @@ Public Class SQLite_db
         Dim cnn_string As String
         Dim cnn_string_builder As New SQLiteConnectionStringBuilder()
 
-        cnn_string_builder. = "Microsoft Access Driver (*.mdb, *.accdb)"
+        cnn_string_builder.Add("Data Source", "..\..\..\data\db.sqlite3")
 
-        cnn_string_builder.Add("Dbq", ".\..\..\..\data\Database.accdb")
-        cnn_string_builder.Add("Uid", "Admin")
-        cnn_string_builder.Add("Pwd", "")
+        cnn_string_builder.Add("DateTimeFormat", "JulianDay")
 
         cnn_string = cnn_string_builder.ToString()
 

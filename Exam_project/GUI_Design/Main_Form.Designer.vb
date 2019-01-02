@@ -22,9 +22,9 @@ Partial Class Main_Form
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage_Diagram = New System.Windows.Forms.TabPage()
         Me.Main_Chart = New System.Windows.Forms.DataVisualization.Charting.Chart()
@@ -44,12 +44,21 @@ Partial Class Main_Form
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage_Diagram.SuspendLayout()
         CType(Me.Main_Chart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage_Table.SuspendLayout()
         CType(Me.Main_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel1.SuspendLayout()
+        Me.FlowLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -75,19 +84,19 @@ Partial Class Main_Form
         '
         'Main_Chart
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Main_Chart.ChartAreas.Add(ChartArea2)
+        ChartArea1.Name = "ChartArea1"
+        Me.Main_Chart.ChartAreas.Add(ChartArea1)
         Me.Main_Chart.Location = New System.Drawing.Point(6, 6)
         Me.Main_Chart.Name = "Main_Chart"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series_Line"
-        Series4.ChartArea = "ChartArea1"
-        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
-        Series4.Name = "Series_Points"
-        Me.Main_Chart.Series.Add(Series3)
-        Me.Main_Chart.Series.Add(Series4)
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series_Line"
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
+        Series2.Name = "Series_Points"
+        Me.Main_Chart.Series.Add(Series1)
+        Me.Main_Chart.Series.Add(Series2)
         Me.Main_Chart.Size = New System.Drawing.Size(388, 315)
         Me.Main_Chart.TabIndex = 0
         Me.Main_Chart.Text = "Chart1"
@@ -114,7 +123,7 @@ Partial Class Main_Form
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(686, 129)
+        Me.Button1.Location = New System.Drawing.Point(709, 123)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(214, 29)
         Me.Button1.TabIndex = 1
@@ -240,11 +249,88 @@ Partial Class Main_Form
         Me.ComboBox1.Size = New System.Drawing.Size(121, 24)
         Me.ComboBox1.TabIndex = 9
         '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(15, 348)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(121, 24)
+        Me.ComboBox2.TabIndex = 12
+        '
+        'FlowLayoutPanel2
+        '
+        Me.FlowLayoutPanel2.Controls.Add(Me.Button7)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Button8)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Button9)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Button10)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Button11)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(15, 378)
+        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(133, 106)
+        Me.FlowLayoutPanel2.TabIndex = 11
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(3, 3)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(75, 23)
+        Me.Button7.TabIndex = 0
+        Me.Button7.Text = "Button7"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(3, 32)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(75, 23)
+        Me.Button8.TabIndex = 1
+        Me.Button8.Text = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(3, 61)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(75, 23)
+        Me.Button9.TabIndex = 2
+        Me.Button9.Text = "Button9"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(3, 90)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(75, 23)
+        Me.Button10.TabIndex = 3
+        Me.Button10.Text = "Button10"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(3, 119)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(75, 23)
+        Me.Button11.TabIndex = 4
+        Me.Button11.Text = "Button11"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(12, 328)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(54, 17)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Tag(s):"
+        '
         'Main_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1009, 598)
+        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.FlowLayoutPanel2)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.Label4)
@@ -263,6 +349,7 @@ Partial Class Main_Form
         Me.TabPage_Table.ResumeLayout(False)
         CType(Me.Main_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.FlowLayoutPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -287,4 +374,12 @@ Partial Class Main_Form
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button9 As Button
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Button11 As Button
+    Friend WithEvents Label5 As Label
 End Class

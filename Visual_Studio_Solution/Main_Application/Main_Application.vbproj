@@ -61,8 +61,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.vb" />
+    <Compile Include="Balance.vb" />
+    <Compile Include="Criterion_Group.vb" />
     <Compile Include="DB_names.vb" />
     <Compile Include="Module_Main.vb" />
+    <Compile Include="Partner.vb" />
+    <Compile Include="Tag.vb" />
+    <Compile Include="Transaction.vb" />
+    <Compile Include="Transaction_Element.vb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="My Project\" />

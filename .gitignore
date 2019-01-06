@@ -13,9 +13,9 @@
 # ignore all .txt files in the doc/ directory
 # doc/**/*.txt
 
-Exam_project/*/bin/
-Exam_project/*/obj/
+Visual_Studio_Solution/*/bin/
+Visual_Studio_Solution/*/obj/
 
-Exam_project/data/SQLite_resources/docs/
+Visual_Studio_Solution/packages/
 
-Exam_project/packages/
+data/SQLite_resources/docs/

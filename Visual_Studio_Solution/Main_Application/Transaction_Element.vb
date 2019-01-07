@@ -1,28 +1,24 @@
-﻿Public Class Transaction_Element
+﻿Imports System.Collections.Generic
 
-    Protected _id As Integer
+Public Class Transaction_Element
+
+    Public ReadOnly _id As Integer
     Public amount As Double
     Public description As String
-    Public elements As Collections.Generic.List(Of Transaction_Element)
-    Public tags As Collections.Generic.SortedSet(Of Tag)
+    Public elements As List(Of Transaction_Element)
+    Public tags_id As SortedSet(Of Integer)
 
     Public Sub New(ByVal id As Integer,
                    ByVal amount As Double,
                    Optional ByVal description As String = "",
-                   Optional ByVal elements As Collections.Generic.List(Of Transaction_Element) = Nothing,
-                   Optional ByRef tags As Collections.Generic.SortedSet(Of Tag) = Nothing)
+                   Optional ByVal elements As List(Of Transaction_Element) = Nothing,
+                   Optional ByRef tags_id As SortedSet(Of Integer) = Nothing)
 
         _id = id
         Me.amount = amount
         Me.description = description
         Me.elements = elements
-        Me.tags = tags
+        Me.tags_id = tags_id
 
     End Sub
-
-    Public ReadOnly Property id As Integer
-        Get
-            Return _id
-        End Get
-    End Property
 End Class

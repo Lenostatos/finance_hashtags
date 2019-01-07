@@ -3,6 +3,8 @@
 + Properties exposed to the outside should NOT start with an underscore except when they would otherwise conflict with a VB.Net keyword.
 + Properties only used inside of their class should start with an underscore.
 + Do NOT use auto property because it is less well readable.
++ Write down the "ByVal" keyword for the "Set" part for writing consistency even so "ByRef" wouldn't be possible there.
++ Use "value" as a parameter name for the "Set" part just because it's faster as Visual Studio automatically writes it for you.
 
 # Logical Statements
 + Always use "AndAlso" and "OrElse" instead of "And" and "Or".

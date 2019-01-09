@@ -10,7 +10,7 @@ Public Class Account
     Public Sub New(ByVal id As Integer,
                    ByVal name As String,
                    ByVal balances As SortedSet(Of Balance),
-                   ByVal transactions As List(Of Transaction))
+                   Optional ByVal transactions As List(Of Transaction) = Nothing)
 
         Me.id = id
         Me.name = name
@@ -37,7 +37,7 @@ Public Class Account
         Get
             Return _transactions
         End Get
-        Set(value As List(Of Transaction))
+        Set(ByVal value As List(Of Transaction))
             If value IsNot Nothing AndAlso value.Count > 0 Then
                 _transactions = value
                 _transactions.Sort(New Compare_transaction_by_timestamp)
@@ -45,6 +45,8 @@ Public Class Account
                     _transactions = Nothing
                     Throw New ArgumentException("The earliest transaction of an account must not be earlier than the account's earliest balance.")
                 End If
+            Else
+                _transactions = Nothing
             End If
         End Set
     End Property

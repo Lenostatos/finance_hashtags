@@ -8,7 +8,9 @@ Public Class Criterion_Group(Of T)
     Public ReadOnly name As String
     Private _criteria As SortedSet(Of T)
 
-    Public Sub New(ByVal id As Integer, ByVal name As String, ByRef criteria As SortedSet(Of T))
+    Public Sub New(ByVal id As Integer,
+                   ByVal name As String,
+                   ByRef criteria As SortedSet(Of T))
         Me.id = id
         Me.name = name
         Me.criteria = criteria

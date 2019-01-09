@@ -66,7 +66,8 @@
     <Compile Include="Compare_balance_by_timestamp.vb" />
     <Compile Include="Compare_transaction_by_timestamp.vb" />
     <Compile Include="Criterion_Group.vb" />
-    <Compile Include="DB_names.vb" />
+    <Compile Include="Module_DB_names.vb" />
+    <Compile Include="Model.vb" />
     <Compile Include="Module_Main.vb" />
     <Compile Include="Partner.vb" />
     <Compile Include="Tag.vb" />

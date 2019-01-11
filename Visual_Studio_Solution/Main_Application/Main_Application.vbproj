@@ -63,9 +63,12 @@
   <ItemGroup>
     <Compile Include="Account.vb" />
     <Compile Include="Balance.vb" />
+    <Compile Include="Balances.vb" />
     <Compile Include="Compare_balance_by_timestamp.vb" />
     <Compile Include="Compare_transaction_by_timestamp.vb" />
     <Compile Include="Criterion_Group.vb" />
+    <Compile Include="Inherited_Balances_Test.vb" />
+    <Compile Include="ISorted_Set.vb" />
     <Compile Include="Module_DB_names.vb" />
     <Compile Include="Model.vb" />
     <Compile Include="Module_Main.vb" />

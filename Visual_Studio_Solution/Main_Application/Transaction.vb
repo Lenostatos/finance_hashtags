@@ -4,7 +4,7 @@ Public Class Transaction
 
     Inherits Transaction_Element
 
-    Public date_time As Date
+    Public ReadOnly date_time As Date
     Public partner_id As Integer
 
     Public Sub New(ByVal id As Integer,

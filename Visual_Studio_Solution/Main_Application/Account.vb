@@ -3,14 +3,17 @@
 Public Class Account
 
     Public ReadOnly id As Integer
-    Public ReadOnly name As String
-    Private _balances As SortedSet(Of Balance)
-    Private _transactions As List(Of Transaction)
+    Public name As String
+    Private _balances As Balances
+    Private _transactions As SortedSet(Of Transaction)
+
+    Private Shared ReadOnly _exception_transaction_earlier_than_balance As String = "The earliest transaction of an account must not be earlier than the account's earliest balance."
+    Private Shared ReadOnly _exception_no_balances As String = "There must be at least one balance."
 
     Public Sub New(ByVal id As Integer,
                    ByVal name As String,
-                   ByVal balances As SortedSet(Of Balance),
-                   Optional ByVal transactions As List(Of Transaction) = Nothing)
+                   ByVal balances As Balances,
+                   Optional ByVal transactions As SortedSet(Of Transaction) = Nothing)
 
         Me.id = id
         Me.name = name
@@ -19,31 +22,30 @@ Public Class Account
 
     End Sub
 
-    Public Property balances As SortedSet(Of Balance)
+    Public Property balances As Balances
         Get
             Return _balances
         End Get
-        Set(ByVal value As SortedSet(Of Balance))
-            If value Is Nothing OrElse value.Count = 0 OrElse
-                TypeOf value.Comparer IsNot Compare_balance_by_timestamp Then
-                Throw New ArgumentException("There must be at least one balance and no two balances can have the same timestamp.")
+        Set(ByVal value As Balances)
+            If value Is Nothing OrElse value.Count = 0 Then
+                Throw New ArgumentException(_exception_no_balances)
             Else
                 _balances = value
             End If
         End Set
     End Property
 
-    Public Property transactions As List(Of Transaction)
+    Public Property transactions As SortedSet(Of Transaction)
         Get
             Return _transactions
         End Get
-        Set(ByVal value As List(Of Transaction))
+        Set(ByVal value As SortedSet(Of Transaction))
             If value IsNot Nothing AndAlso value.Count > 0 Then
                 _transactions = value
                 _transactions.Sort(New Compare_transaction_by_timestamp)
                 If _transactions(0).date_time < Me.balances.Min.date_time Then
                     _transactions = Nothing
-                    Throw New ArgumentException("The earliest transaction of an account must not be earlier than the account's earliest balance.")
+                    Throw New ArgumentException(_exception_transaction_earlier_than_balance)
                 End If
             Else
                 _transactions = Nothing

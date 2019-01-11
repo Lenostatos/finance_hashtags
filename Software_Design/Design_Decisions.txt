@@ -13,3 +13,8 @@
 	+ Allows to maintain the current database design.
 	+ Protects from data manipulation in between users.
 	+ Uses more disk space as opposed to storing all the data in one database.
+
+# Back referencing of components to the instances they are contained in
++ The back referencing is supposed to help with inserting data back into the database.
++ Doing this in the data model would consume memory and create two-sided relationships which might cause problems.
++ Therefore this additional information will be stored only in the model part that stores the updates which are supposed to be reported to the database.

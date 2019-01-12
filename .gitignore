@@ -18,4 +18,6 @@ Visual_Studio_Solution/*/obj/
 
 Visual_Studio_Solution/packages/
 
+*.vs/
+
 data/SQLite_resources/docs/

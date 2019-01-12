@@ -1,4 +1,4 @@
-﻿Module Module_DB_names
+﻿Module Module_DB_Names
 
     Public Const table_transaction As String = "_transaction"
     Public Const table_transaction_element As String = "_transaction_element"

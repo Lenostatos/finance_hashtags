@@ -9,5 +9,5 @@ Key features should be:
 + The GUI shoul be as intuitive as possible.
 
 ### Disclaimer:
-This project will be handed in as a course assessment for a programming course and one of the requirements is that
+This project will be handed in as a course assessment for a programming course in February 2019 and one of the requirements is that
 VisualBasic has to be used.

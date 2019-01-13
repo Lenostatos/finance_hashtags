@@ -29,12 +29,12 @@ CREATE TABLE "Transaction"(
 	"date" REAL NOT NULL,
 	"amount" REAL NOT NULL,
 	"description" TEXT DEFAULT NULL,
-	"id_account" INTEGER NOT NULL REFERENCES "Account" ON DELETE RESTRICT, -- the "REFERENCES <table-name>" is a shortcut for referencing the primay key of the table <table-name>.
-	"id_partner" INTEGER DEFAULT NULL REFERENCES "Partner" ON DELETE RESTRICT
+	"id_Account" INTEGER NOT NULL REFERENCES "Account" ON DELETE RESTRICT, -- the "REFERENCES <table-name>" is a shortcut for referencing the primay key of the table <table-name>.
+	"id_Partner" INTEGER DEFAULT NULL REFERENCES "Partner" ON DELETE RESTRICT
 );
 -- In order to speed up the checks for foreign key violations the foreign key columns should be indexed (says the SQLite documentation).
-CREATE INDEX "transaction_account_index" ON "Transaction"("id_account");
-CREATE INDEX "transaction_partner_index" ON "Transaction"("id_partner");
+CREATE INDEX "transaction_account_index" ON "Transaction"("id_Account");
+CREATE INDEX "transaction_partner_index" ON "Transaction"("id_Partner");
 
 -- Every column that might be subject to a WHERE clause should be indexed to improve performance.
 -- TODO: Add missing indices.
@@ -44,11 +44,11 @@ CREATE TABLE "Transaction_Element"(
 	"id" INTEGER PRIMARY KEY,
 	"amount" REAL NOT NULL,
 	"description" TEXT DEFAULT NULL,
-	"id_transaction_element" INTEGER DEFAULT NULL REFERENCES "Transaction_Element" ON DELETE RESTRICT,
-	"id_transaction" INTEGER NOT NULL REFERENCES "Transaction" ON DELETE RESTRICT
+	"id_Transaction_element" INTEGER DEFAULT NULL REFERENCES "Transaction_Element" ON DELETE RESTRICT,
+	"id_Transaction" INTEGER NOT NULL REFERENCES "Transaction" ON DELETE RESTRICT
 );
-CREATE INDEX "transaction_element_on_itself_index" ON "Transaction_Element"("id_transaction_element");
-CREATE INDEX "transaction_element_transaction_index" ON "Transaction_Element"("id_transaction");
+CREATE INDEX "transaction_element_on_itself_index" ON "Transaction_Element"("id_Transaction_element");
+CREATE INDEX "transaction_element_transaction_index" ON "Transaction_Element"("id_Transaction");
 
 CREATE TABLE "Tag"(
 	"id" INTEGER PRIMARY KEY,
@@ -57,13 +57,13 @@ CREATE TABLE "Tag"(
 
 CREATE TABLE "Transaction_Tagging"(
 	"id" INTEGER PRIMARY KEY,
-	"id_tag" INTEGER NOT NULL REFERENCES "Tag" ON DELETE RESTRICT,
-	"id_transaction" INTEGER DEFAULT NULL REFERENCES "Transaction" ON DELETE RESTRICT,
-	"id_transaction_element" INTEGER DEFAULT NULL REFERENCES "Transaction_Element" ON DELETE RESTRICT
+	"id_Tag" INTEGER NOT NULL REFERENCES "Tag" ON DELETE RESTRICT,
+	"id_Transaction" INTEGER DEFAULT NULL REFERENCES "Transaction" ON DELETE RESTRICT,
+	"id_Transaction_element" INTEGER DEFAULT NULL REFERENCES "Transaction_Element" ON DELETE RESTRICT
 );
-CREATE INDEX "transaction_tagging_tag_index" ON "Transaction_Tagging"("id_tag");
-CREATE INDEX "transaction_tagging_transaction_index" ON "Transaction_Tagging"("id_transaction");
-CREATE INDEX "transaction_tagging_transaction_element_index" ON "Transaction_Tagging"("id_transaction_element");
+CREATE INDEX "transaction_tagging_tag_index" ON "Transaction_Tagging"("id_Tag");
+CREATE INDEX "transaction_tagging_transaction_index" ON "Transaction_Tagging"("id_Transaction");
+CREATE INDEX "transaction_tagging_transaction_element_index" ON "Transaction_Tagging"("id_Transaction_element");
 
 CREATE TABLE "Tag_Group"(
 	"id" INTEGER PRIMARY KEY,
@@ -72,11 +72,11 @@ CREATE TABLE "Tag_Group"(
 
 CREATE TABLE "Tag_Grouping"(
 	"id" INTEGER PRIMARY KEY,
-	"id_tag" INTEGER NOT NULL REFERENCES "Tag" ON DELETE RESTRICT,
-	"id_tag_group" INTEGER DEFAULT NULL REFERENCES "Tag_Group" ON DELETE RESTRICT
+	"id_Tag" INTEGER NOT NULL REFERENCES "Tag" ON DELETE RESTRICT,
+	"id_Tag_group" INTEGER DEFAULT NULL REFERENCES "Tag_Group" ON DELETE RESTRICT
 );
-CREATE INDEX "tag_grouping_tag_index" ON "Tag_Grouping"("id_tag");
-CREATE INDEX "tag_grouping_tag_group_index" ON "Tag_Grouping"("id_tag_group");
+CREATE INDEX "tag_grouping_tag_index" ON "Tag_Grouping"("id_Tag");
+CREATE INDEX "tag_grouping_tag_group_index" ON "Tag_Grouping"("id_Tag_group");
 
 CREATE TABLE "Partner"(
 	"id" INTEGER PRIMARY KEY,
@@ -91,11 +91,11 @@ CREATE TABLE "Partner_Group"(
 
 CREATE TABLE "Partner_Grouping"(
 	"id" INTEGER PRIMARY KEY,
-	"id_partner" INTEGER NOT NULL REFERENCES "Partner" ON DELETE RESTRICT,
-	"id_partner_group" INTEGER DEFAULT NULL REFERENCES "Partner_Group" ON DELETE RESTRICT
+	"id_Partner" INTEGER NOT NULL REFERENCES "Partner" ON DELETE RESTRICT,
+	"id_Partner_group" INTEGER DEFAULT NULL REFERENCES "Partner_Group" ON DELETE RESTRICT
 );
-CREATE INDEX "partner_grouping_partner_index" ON "Partner_Grouping"("id_partner");
-CREATE INDEX "partner_grouping_partner_group_index" ON "Partner_Grouping"("id_partner_group");
+CREATE INDEX "partner_grouping_partner_index" ON "Partner_Grouping"("id_Partner");
+CREATE INDEX "partner_grouping_partner_group_index" ON "Partner_Grouping"("id_Partner_group");
 
 CREATE TABLE "Account"(
 	"id" INTEGER PRIMARY KEY,
@@ -109,16 +109,16 @@ CREATE TABLE "Account_Group"(
 
 CREATE TABLE "Account_Grouping"(
 	"id" INTEGER PRIMARY KEY,
-	"id_account" INTEGER NOT NULL REFERENCES "Account" ON DELETE RESTRICT,
-	"id_account_group" INTEGER DEFAULT NULL REFERENCES "Account_Group" ON DELETE RESTRICT
+	"id_Account" INTEGER NOT NULL REFERENCES "Account" ON DELETE RESTRICT,
+	"id_Account_group" INTEGER DEFAULT NULL REFERENCES "Account_Group" ON DELETE RESTRICT
 );
-CREATE INDEX "account_grouping_account_index" ON "Account_Grouping"("id_account");
-CREATE INDEX "account_grouping_account_group_index" ON "Account_Grouping"("id_account_group");
+CREATE INDEX "account_grouping_account_index" ON "Account_Grouping"("id_Account");
+CREATE INDEX "account_grouping_account_group_index" ON "Account_Grouping"("id_Account_group");
 
 CREATE TABLE "Balance"(
 	"id" INTEGER PRIMARY KEY,
 	"date" REAL NOT NULL,
 	"amount" REAL NOT NULL,
-	"id_account" INTEGER NOT NULL REFERENCES "Account" ON DELETE RESTRICT
+	"id_Account" INTEGER NOT NULL REFERENCES "Account" ON DELETE RESTRICT
 );
-CREATE INDEX "balance_account_index" ON "Balance"("id_account");
+CREATE INDEX "balance_account_index" ON "Balance"("id_Account");

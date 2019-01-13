@@ -1,7 +1,10 @@
 ﻿Public Class Tag
 
-    Public ReadOnly id As Integer
-    Public ReadOnly name As String
+    Public id As Integer
+    Public name As String
+
+    Public Sub New()
+    End Sub
 
     Public Sub New(ByVal id As Integer, ByVal name As String)
         Me.id = id

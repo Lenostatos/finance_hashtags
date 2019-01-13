@@ -1,4 +1,4 @@
-﻿Public Class Tag
+﻿Public Class Tag_Group
 
     Public id As Integer
     Public name As String

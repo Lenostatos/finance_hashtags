@@ -11,6 +11,10 @@ Module Module_Main
             .IsIdentifier = Function(ByVal prop_info As Reflection.PropertyInfo) As Boolean
                                 Return prop_info.Name = "id"
                             End Function
+            .AllowInsert = Function(ByVal prop_info As Reflection.PropertyInfo) As Boolean
+                               Return Not .IsIdentifier(prop_info)
+                           End Function
+            .AllowUpdate = .AllowInsert
         End With
         Configure.Extensions().WithConventionBasedMapping(custom_mapping_convention_settings)
 

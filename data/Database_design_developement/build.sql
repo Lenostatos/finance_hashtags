@@ -10,18 +10,18 @@ PRAGMA foreign_keys = ON;
 -- In order to avoid conflicts with SQL keywords every user-defined name has to be enclosed in double quotes.
 
 -- TODO: find a command for dropping all the tables at once
+DROP TABLE IF EXISTS "Transaction_Tagging";
 DROP TABLE IF EXISTS "Transaction";
 DROP TABLE IF EXISTS "Transaction_Element";
-DROP TABLE IF EXISTS "Tag";
-DROP TABLE IF EXISTS "Transaction_Tagging";
-DROP TABLE IF EXISTS "Tag_Group";
 DROP TABLE IF EXISTS "Tag_Grouping";
+DROP TABLE IF EXISTS "Tag";
+DROP TABLE IF EXISTS "Tag_Group";
+DROP TABLE IF EXISTS "Partner_Grouping";
 DROP TABLE IF EXISTS "Partner";
 DROP TABLE IF EXISTS "Partner_Group";
-DROP TABLE IF EXISTS "Partner_Grouping";
+DROP TABLE IF EXISTS "Account_Grouping";
 DROP TABLE IF EXISTS "Account";
 DROP TABLE IF EXISTS "Account_Group";
-DROP TABLE IF EXISTS "Account_Grouping";
 DROP TABLE IF EXISTS "Balance";
 
 CREATE TABLE "Transaction"(
@@ -58,7 +58,7 @@ CREATE TABLE "Tag"(
 CREATE TABLE "Transaction_Tagging"(
 	"id" INTEGER PRIMARY KEY,
 	"id_Tag" INTEGER NOT NULL REFERENCES "Tag" ON DELETE RESTRICT,
-	"id_Transaction" INTEGER DEFAULT NULL REFERENCES "Transaction" ON DELETE RESTRICT,
+	"id_Transaction" INTEGER DEFAULT NULL REFERENCES "Transaction" ON DELETE RESTRICT, -- TODO: Change RESTRICT to something appropriate
 	"id_Transaction_element" INTEGER DEFAULT NULL REFERENCES "Transaction_Element" ON DELETE RESTRICT
 );
 CREATE INDEX "transaction_tagging_tag_index" ON "Transaction_Tagging"("id_Tag");
@@ -72,11 +72,11 @@ CREATE TABLE "Tag_Group"(
 
 CREATE TABLE "Tag_Grouping"(
 	"id" INTEGER PRIMARY KEY,
-	"id_Tag" INTEGER NOT NULL REFERENCES "Tag" ON DELETE RESTRICT,
-	"id_Tag_group" INTEGER DEFAULT NULL REFERENCES "Tag_Group" ON DELETE RESTRICT
+	"id_Tag" INTEGER NOT NULL REFERENCES "Tag" ON DELETE CASCADE,
+	"id_Tag_Group" INTEGER NOT NULL REFERENCES "Tag_Group" ON DELETE CASCADE
 );
 CREATE INDEX "tag_grouping_tag_index" ON "Tag_Grouping"("id_Tag");
-CREATE INDEX "tag_grouping_tag_group_index" ON "Tag_Grouping"("id_Tag_group");
+CREATE INDEX "tag_grouping_tag_group_index" ON "Tag_Grouping"("id_Tag_Group");
 
 CREATE TABLE "Partner"(
 	"id" INTEGER PRIMARY KEY,
@@ -92,10 +92,10 @@ CREATE TABLE "Partner_Group"(
 CREATE TABLE "Partner_Grouping"(
 	"id" INTEGER PRIMARY KEY,
 	"id_Partner" INTEGER NOT NULL REFERENCES "Partner" ON DELETE RESTRICT,
-	"id_Partner_group" INTEGER DEFAULT NULL REFERENCES "Partner_Group" ON DELETE RESTRICT
+	"id_Partner_Group" INTEGER DEFAULT NULL REFERENCES "Partner_Group" ON DELETE RESTRICT
 );
 CREATE INDEX "partner_grouping_partner_index" ON "Partner_Grouping"("id_Partner");
-CREATE INDEX "partner_grouping_partner_group_index" ON "Partner_Grouping"("id_Partner_group");
+CREATE INDEX "partner_grouping_partner_group_index" ON "Partner_Grouping"("id_Partner_Group");
 
 CREATE TABLE "Account"(
 	"id" INTEGER PRIMARY KEY,
@@ -110,10 +110,10 @@ CREATE TABLE "Account_Group"(
 CREATE TABLE "Account_Grouping"(
 	"id" INTEGER PRIMARY KEY,
 	"id_Account" INTEGER NOT NULL REFERENCES "Account" ON DELETE RESTRICT,
-	"id_Account_group" INTEGER DEFAULT NULL REFERENCES "Account_Group" ON DELETE RESTRICT
+	"id_Account_Group" INTEGER DEFAULT NULL REFERENCES "Account_Group" ON DELETE RESTRICT
 );
 CREATE INDEX "account_grouping_account_index" ON "Account_Grouping"("id_Account");
-CREATE INDEX "account_grouping_account_group_index" ON "Account_Grouping"("id_Account_group");
+CREATE INDEX "account_grouping_account_group_index" ON "Account_Grouping"("id_Account_Group");
 
 CREATE TABLE "Balance"(
 	"id" INTEGER PRIMARY KEY,

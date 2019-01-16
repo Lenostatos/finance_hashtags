@@ -32,4 +32,8 @@
     Public Const column_id_account As String = column_id & name_connector & table_account
     Public Const column_id_account_group As String = column_id & name_connector & table_account_group
 
+    Public Function quote(ByRef str As String) As String
+        Return """" & str & """"
+    End Function
+
 End Module

@@ -69,7 +69,7 @@
   <ItemGroup>
     <Compile Include="Entities\Account.vb" />
     <Compile Include="Entities\Balance.vb" />
-    <Compile Include="Deprecated\Balances.vb" />
+    <Compile Include="Entities\Balances.vb" />
     <Compile Include="Deprecated\Compare_balance_by_timestamp.vb" />
     <Compile Include="Deprecated\Compare_transaction_by_timestamp.vb" />
     <Compile Include="Deprecated\Criterion_Group.vb" />

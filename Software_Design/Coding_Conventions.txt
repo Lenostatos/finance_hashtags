@@ -8,3 +8,6 @@
 
 # Logical Statements
 + Always use "AndAlso" and "OrElse" instead of "And" and "Or".
+
+# Class Code
++ Always use the "Me" keyword for better readability.

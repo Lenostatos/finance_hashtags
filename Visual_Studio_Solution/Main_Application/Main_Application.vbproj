@@ -69,21 +69,24 @@
   <ItemGroup>
     <Compile Include="Entities\Account.vb" />
     <Compile Include="Entities\Balance.vb" />
-    <Compile Include="Deprecated\Balances.vb" />
+    <Compile Include="Entities\Balances.vb" />
     <Compile Include="Deprecated\Compare_balance_by_timestamp.vb" />
     <Compile Include="Deprecated\Compare_transaction_by_timestamp.vb" />
     <Compile Include="Deprecated\Criterion_Group.vb" />
     <Compile Include="Deprecated\Inherited_Balances_Test.vb" />
     <Compile Include="Deprecated\ISorted_Set.vb" />
     <Compile Include="Entities\Tag_Group.vb" />
-    <Compile Include="Modules\Module_DB_Connection.vb" />
-    <Compile Include="Modules\Module_DB_Names.vb" />
+    <Compile Include="Modules\DB_Connection.vb" />
+    <Compile Include="Modules\DB_Names.vb" />
     <Compile Include="Deprecated\Model.vb" />
-    <Compile Include="Modules\Module_Main.vb" />
+    <Compile Include="Modules\Exception_Messages.vb" />
+    <Compile Include="Modules\Main.vb" />
     <Compile Include="Entities\Partner.vb" />
     <Compile Include="Entities\Tag.vb" />
     <Compile Include="Entities\Transaction.vb" />
     <Compile Include="Entities\Transaction_Element.vb" />
+    <Compile Include="Other\Tags.vb" />
+    <Compile Include="Other\Tag_Groups.vb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="My Project\" />

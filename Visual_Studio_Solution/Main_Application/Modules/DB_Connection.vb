@@ -1,4 +1,4 @@
-﻿Module Module_DB_Connection
+﻿Module DB_Connection
 
     Public SessionFactory As MicroLite.ISessionFactory
 
